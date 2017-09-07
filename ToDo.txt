@@ -60,7 +60,7 @@ List
     |     |-------
     |     |       |
     |     |       |     No
-    -------       --------------> <Other> must be arithmatic operator, etc. Assign new token. Push to 
+    -------       --------------> <Other> must be arithmatic operator, variable name, etc. Assign new token. Push to 
                                                                                     appropriate class.
                                                                                     
                                           
