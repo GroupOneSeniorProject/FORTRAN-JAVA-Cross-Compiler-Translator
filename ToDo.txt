@@ -1,0 +1,63 @@
+1st deliverable:
+
+Print statements
+Basic data types + assignments
+Basic Arithmetic
+Hello World!
+
+We need to build the lexical analyzer before anything else.
+Remember to separate actual translation and implementation into their appropriate classes
+
+Lexical analyzer structure:
+
+Build a list of fortran code delimited by whitespace.
+Hardcode keywords list
+Create token(maybe)
+Token example:
+
+ program test
+ implicit none
+ print *, "Hello World"
+ end program test
+ 
+ Tokens to
+ 
+ <Key>program
+ <Other>test
+ <Key>implicit
+ <Other>none
+ <Key>print
+ <Other>*
+ <Regular>,
+ <Other>"Hello
+ <Other>World"
+ <Key>end
+ <Key>program
+ <Other>test
+ 
+ 
+ Tokenizing something like print *, "print" is too complicated for this deliverable, and will be done later
+ 
+Fortran           Key Word
+Delimit              List
+List
+-------           -------
+|     |           |     |
+|     |           |     |
+|     |           |     |
+|     |           |     |    Yes
+|     |---------->|     |----------><Key>
+|     |           |     |
+|     |           |     |  No    
+|     |           |     |----------><Other>
+-------           -------     
+    
+    Token
+    List
+    -------       --------------> [Appropriate_Class]
+    |     |       |      Yes
+    |     | <key> |
+    |     |-------
+    |     |       |
+    |     |       |     No
+    -------       --------------> <Other> must be assign statement,arithmatic operator, etc. Assign new token. Push to appropriate class.
