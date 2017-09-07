@@ -28,7 +28,7 @@ Token example:
  <Other>none
  <Key>print
  <Other>*
- <Regular>,
+ <Other>,
  <Other>"Hello
  <Other>World"
  <Key>end
@@ -60,4 +60,7 @@ List
     |     |-------
     |     |       |
     |     |       |     No
-    -------       --------------> <Other> must be assign statement,arithmatic operator, etc. Assign new token. Push to appropriate class.
+    -------       --------------> <Other> must be arithmatic operator, etc. Assign new token. Push to 
+                                                                                    appropriate class.
+                                                                                    
+                                          
