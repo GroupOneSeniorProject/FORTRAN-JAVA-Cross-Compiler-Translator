@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fortrantojavacompiler;
 
 import java.awt.*;
@@ -10,10 +6,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 
-/**
- *
- * @author Nelsosn Tsaku
- */
+
 public class GUI extends javax.swing.JPanel {
 
     /**
