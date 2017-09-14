@@ -1,0 +1,45 @@
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_144" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq {space :p:194:p, comp jLabel1:::p::p}, seq l {space :p:224:p, comp jLabel2:::p:203:p}, seq l {space :p:56:p, par l {seq t {comp jLabel3:::p:85:p, space :p:36:p, comp jScrollPane1:::p:396:p, space :p:8:p}, comp jFileChooser1:::p:537:p}}}, space ::65:x}, seq t {space :0:0:x, comp jButton1:::p::p, space :p:81:p}}"
+			"$verticalGroup": "par l {seq {space :::p, comp jLabel1:::p:37:p, space :::p, comp jLabel2:::p::p, space :::p, comp jFileChooser1:::p:242:p, space s:::p, par l {comp jScrollPane1:::p:191:p, comp jLabel3:::p:31:p}, space :p:28:p, comp jButton1:::p::p, space ::41:x}}"
+		} ) {
+			name: "this"
+			"background": new java.awt.Color( 0, 153, 255, 255 )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel1"
+				"background": new java.awt.Color( 255, 255, 255, 255 )
+				"font": new java.awt.Font( "Times New Roman", 1, 18 )
+				"text": "Fortran To JAVA Cross-Compiler"
+			} )
+			add( new FormComponent( "javax.swing.JFileChooser" ) {
+				name: "jFileChooser1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel2"
+				"text": "Browse you source file below"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane1"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "jTextArea1"
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel3"
+				"text": "JAVA output"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "jButton1"
+				"text": "SAVE"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
