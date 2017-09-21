@@ -5,7 +5,7 @@ public class functions
 
     }
     String startprogram(String s){
-        String thisProgram = "public class " + s + "\ns{\n public static void main(String[] args)\n{\n";
+        String thisProgram = "public class " + s + "\n{\n public static void main(String[] args)\n{\n";
         return thisProgram;
     }
 }
