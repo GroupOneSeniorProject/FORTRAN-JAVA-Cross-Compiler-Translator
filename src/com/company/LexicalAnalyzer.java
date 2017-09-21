@@ -21,7 +21,7 @@ public class LexicalAnalyzer
             keyWords.add(keywordsArray[i]);
             
         }
-        openF95("test.f95"); //For IntelliJ, file must be in project root folder
+        openF95("firstDeliverable.f95"); //For IntelliJ, file must be in project root folder
         check();
     }
 
@@ -53,7 +53,7 @@ public class LexicalAnalyzer
     {
         //Declare objects here
         functions fun = new functions();
-        //Open outputfile
+        AssignStatement assign = new AssignStatement();
         for(int i = 0; i < Fortran.size(); i++)
         {
             String[] thisLine = Fortran.get(i).split(" ");
@@ -72,7 +72,6 @@ public class LexicalAnalyzer
 
                 if(keyWords.contains(thisLine[j]))
                 {
-                    //System.out.print(s + " ");
 
                     if (thisLine[j].equalsIgnoreCase("program") && !thisLine[0].equalsIgnoreCase("end"))
                     {
@@ -89,18 +88,35 @@ public class LexicalAnalyzer
                         Java.add(fun.endprogram(thisLine[j+1]));
                     }
 
+                    if (thisLine[j].equalsIgnoreCase("integer"))//equalsIgnoreCase("integer"))
+                    {
+                       Java.add(assign.integer(thisLine,j));
+                    }
+
                 }
 
 
             }
             if ( i == Fortran.size()-1 )
                 Java.add("}");
-            System.out.println();
+
 
         }
         for (int i = 0 ; i < Java.size(); i++)
         {
             System.out.println(Java.get(i));
         }
+    }
+
+    public int ignoreWhitespace(int start, int size, String[] s)
+    {
+        for (int i = 0; i < s.length; i++)
+        {
+            if (!s[i].equals(" "))
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 }
