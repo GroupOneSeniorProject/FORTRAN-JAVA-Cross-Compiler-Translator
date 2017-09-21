@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+//import ~/IdeaProjects/SeniorProject/src/functions.java;
 
 public class LexicalAnalyzer
 {
@@ -32,11 +33,11 @@ public class LexicalAnalyzer
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext())
             {
-                 Fortran.add(scanner.next());
+                 Fortran.add(scanner.nextLine());
             }
 
             scanner.close();
-            Fortran.removeAll(Arrays.asList("", null));
+            //Fortran.removeAll(Arrays.asList("", null));
     }
         catch(Exception fileIO)
         {
@@ -48,14 +49,36 @@ public class LexicalAnalyzer
     //This is where we pass to appropriate object
     public void check()
     {
+
         for(int i = 0; i < Fortran.size(); i++)
         {
-            if(keyWords.contains(Fortran.get(i)))
+            String[] thisLine = Fortran.get(i).split(" ");
+            //System.out.println(Fortran.get(i));
+
+   /*         if(keyWords.contains(Fortran.get(i)))
             {
                 //Just a check, this is the if statement where we pass to other class.
-                System.out.println(Fortran.get(i));
+               System.out.println(Fortran.get(i));
 
             }
+*/
+            for(int j = 0; j < thisLine.length; ++j)
+            {
+
+
+                if(keyWords.contains(thisLine[j])) {
+                    //System.out.print(s + " ");
+                    if (thisLine[j].equalsIgnoreCase("program"))
+                    {
+                        functions fun = new functions();
+                        String y = fun.startprogram(thisLine[j + 1]);
+                        System.out.println(y);
+
+                    }
+                }
+            }
+            System.out.println();
+
         }
     }
 }
