@@ -26,7 +26,7 @@ program firstDeliverable
         
         bool = string1 == string2
 
-        if (bool .eqv. .true.) then
+        if (bool) then
         
         print *, "The words entered are identical"
 
