@@ -20,7 +20,7 @@ program firstDeliverable
 
         read *, string1
 
-        print *, "Enter a second letter of six letters or less"
+        print *, "Enter a second word of six letters or less"
 
         read *, string2
         
