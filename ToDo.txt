@@ -63,4 +63,17 @@ List
     -------       --------------> <Other> must be arithmatic operator, variable name, etc. Assign new token. Push to 
                                                                                     appropriate class.
                                                                                     
+                                                                                    
+   Assigned tasks
+   
+   GUI implementation: Nelson
+   Assignment statements: Johnathon
+   arithmatic operators: Johnathon
+   comparison operators: Heath
+   print: Liz
+   I/O: Wes
+   conditionals: Heath
+   
+   Powerpoint: Nelson
+                                                                                    
                                           

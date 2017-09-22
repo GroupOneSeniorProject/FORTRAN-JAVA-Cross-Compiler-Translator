@@ -20,13 +20,13 @@ program firstDeliverable
 
         read *, string1
 
-        print *, "Enter a second letter of six letters or less"
+        print *, "Enter a second word of six letters or less"
 
         read *, string2
         
         bool = string1 == string2
 
-        if (bool .eqv. .true.) then
+        if (bool) then
         
         print *, "The words entered are identical"
 

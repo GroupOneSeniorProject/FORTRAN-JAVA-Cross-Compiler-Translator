@@ -8,7 +8,7 @@ public class main
     {
         GUI g = new GUI();
 
-        //g.addAncestorListener();
+       // g.addAncestorListener();
 
 
         LexicalAnalyzer lex = new LexicalAnalyzer();

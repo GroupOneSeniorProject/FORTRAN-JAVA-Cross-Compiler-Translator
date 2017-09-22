@@ -1,17 +1,19 @@
 import java.util.*;
 import java.io.*;
+import java.*;
 //import ~/IdeaProjects/SeniorProject/src/functions.java;
 
 public class LexicalAnalyzer
 {
     LinkedList<String> keyWords = new LinkedList<String>();
     LinkedList<String> Fortran = new LinkedList<String>();
+    LinkedList<String> Java = new LinkedList<String>();
 
     public LexicalAnalyzer()
     {
         //this is an array of all keywords through Fortran 95
         final String[] keywordsArray = {"real", "integer", "complex", "assign", "backspace", "block data", "call", "close", "common", "continue", "data", "dimension", "do", "else", "else if", "end","endfile","endif", "entry", "equivalence", "external", "format", "function", "goto", "if", "implicit", "inquire", "intrinsic", "open", "parameter", "pause", "print", "program", "read", "return", "rewind", "rewrite", "save", "stop", "subroutine", "then", "write", "allocatable", "allocate", "case", "contains", "cycle", "deallocate", "elsewhere", "exit", "include", "interface", "intent", "module", "namelist", "nullify", "only", "operator", "optional", "pointer", "private", "procedure", "public", "recursive", "result", "select", "sequence", "target", "use", "while", "where", "elemental", "forall", "pure"};
-        
+        Java.add(0, "import java.*;\n");
         //Use a loop to load all keywords into the list at once.
         for(int i = 0; i < keywordsArray.length; i++)
         {
@@ -19,7 +21,7 @@ public class LexicalAnalyzer
             keyWords.add(keywordsArray[i]);
             
         }
-        openF95("test.f95"); //For IntelliJ, file must be in project root folder
+        openF95("firstDeliverable.f95"); //For IntelliJ, file must be in project root folder
         check();
     }
 
@@ -49,7 +51,9 @@ public class LexicalAnalyzer
     //This is where we pass to appropriate object
     public void check()
     {
-
+        //Declare objects here
+        functions fun = new functions();
+        AssignStatement assign = new AssignStatement();
         for(int i = 0; i < Fortran.size(); i++)
         {
             String[] thisLine = Fortran.get(i).split(" ");
@@ -66,19 +70,53 @@ public class LexicalAnalyzer
             {
 
 
-                if(keyWords.contains(thisLine[j])) {
-                    //System.out.print(s + " ");
-                    if (thisLine[j].equalsIgnoreCase("program"))
+                if(keyWords.contains(thisLine[j]))
+                {
+
+                    if (thisLine[j].equalsIgnoreCase("program") && !thisLine[0].equalsIgnoreCase("end"))
                     {
-                        functions fun = new functions();
-                        String y = fun.startprogram(thisLine[j + 1]);
-                        System.out.println(y);
+                        //Pass to classes
+
+                        //add Java code to arraylist
+                        Java.add(fun.startprogram(thisLine[j + 1]));
+
+                        System.out.println();
 
                     }
+                    else if (thisLine[j].equalsIgnoreCase("end" ))
+                    {
+                        Java.add(fun.endprogram(thisLine[j+1]));
+                    }
+
+                    if (thisLine[j].equalsIgnoreCase("integer"))//equalsIgnoreCase("integer"))
+                    {
+                       Java.add(assign.integer(thisLine,j));
+                    }
+
                 }
+
+
             }
-            System.out.println();
+            if ( i == Fortran.size()-1 )
+                Java.add("}");
+
 
         }
+        for (int i = 0 ; i < Java.size(); i++)
+        {
+            System.out.println(Java.get(i));
+        }
+    }
+
+    public int ignoreWhitespace(int start, int size, String[] s)
+    {
+        for (int i = 0; i < s.length; i++)
+        {
+            if (!s[i].equals(" "))
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 }
