@@ -57,12 +57,16 @@ public class functions
         for (int i = 0; i < s.length; i++) {
 
             if (s[i].equalsIgnoreCase("if")) {
-                return "if(";
+                builder.append("\n" + s[i] + " ");
+                start = true;
+            } else if (start && !s[i].equalsIgnoreCase("then")) {
+                builder.append(s[i] + " ");
+            } else if (start) {
+                builder.append("\n{");
             }
-
             if(s[i].equalsIgnoreCase("else"))
             {
-                builder.append("else\n{");
+                builder.append("\nelse\n{");
             }
         }
             return builder.toString();
