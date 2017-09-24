@@ -142,7 +142,7 @@ public class functions
         else if(s.equalsIgnoreCase("=="))
         {
 
-            if(charVariables.contains("b"))
+            if(charVariables.contains(n))
             {
                 java.add(b + ".equals(" + n + ")");
             }
@@ -152,7 +152,7 @@ public class functions
         }
         else if(s.equalsIgnoreCase("/="))
         {
-            if(charVariables.contains("b"))
+            if(charVariables.contains(n))
             {
                 java.add("!" + b + ".equals(" + n + ") ");
             }
