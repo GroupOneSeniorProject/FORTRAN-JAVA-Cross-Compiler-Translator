@@ -142,17 +142,27 @@ public class functions
         else if(s.equalsIgnoreCase("=="))
         {
 
-            if(charVariables.contains("b"))
+            if(java.getLast().equalsIgnoreCase(b))
             {
-                java.add(b + ".equals(" + n + ")");
+                if(charVariables.contains(n))
+                {
+                    java.add(".equals(" + n + ")");
+                }
+                else {
+                    java.add(" == " + n);
+                }
             }
             else {
-                java.add(b + " == " + n);
+                if (charVariables.contains(n)) {
+                    java.add(b + ".equals(" + n + ")");
+                } else {
+                    java.add(b + " == " + n);
+                }
             }
         }
         else if(s.equalsIgnoreCase("/="))
         {
-            if(charVariables.contains("b"))
+            if(charVariables.contains(n))
             {
                 java.add("!" + b + ".equals(" + n + ") ");
             }
