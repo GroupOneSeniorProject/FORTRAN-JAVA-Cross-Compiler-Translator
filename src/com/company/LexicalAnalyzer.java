@@ -117,7 +117,7 @@ public class LexicalAnalyzer
                     //pass in for if/else logic
                     if((thisLine[j].equalsIgnoreCase("if") || thisLine[j].equalsIgnoreCase("else") || thisLine[j].equalsIgnoreCase("then")) && !thisLine[j - 1].equalsIgnoreCase("end"))
                     {
-                        Java.add(fun.ifelse(thisLine[j]));
+                        Java.add(fun.ifelse(thisLine));
                     }
                     //pass in for logical comparisons
                     if(thisLine[j].equalsIgnoreCase(".eqv.") || thisLine[j].equalsIgnoreCase(".true.") ||
