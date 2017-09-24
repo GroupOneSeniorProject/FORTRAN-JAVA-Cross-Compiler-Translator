@@ -144,6 +144,12 @@ public class LexicalAnalyzer
                     fun.comparison(thisLine[j], thisLine[j - 1], thisLine[j + 1], charVariables, Java);
                 }
 
+                if(thisLine[j].equalsIgnoreCase("="))
+                {
+                    fun.arithmetic(thisLine[j], thisLine[j - 1], thisLine[j + 1], Java);
+                }
+
+                
                 if(integerVariables.contains(thisLine[j]))
                 {
                     int temp = j;
