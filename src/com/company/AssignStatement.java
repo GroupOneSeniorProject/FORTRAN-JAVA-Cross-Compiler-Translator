@@ -70,10 +70,11 @@ public class AssignStatement {
             {
                 if (!(s[i].equalsIgnoreCase("::") || s[i].equalsIgnoreCase("character"))) {
                     build.append(s[i] + " ");
+                    character.add(s[i]);
+
                 }
             }
         }
-        character.add(build.toString());
         build.append(";");
         return build.toString();
     }
