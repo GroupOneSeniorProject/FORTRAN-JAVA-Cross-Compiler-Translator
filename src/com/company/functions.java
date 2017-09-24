@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class functions
 {
     public functions()
@@ -12,7 +15,7 @@ public class functions
     {
         return "}\n";
     }
-    
+
     String logical(String s)
     {
         String result = "";
@@ -64,35 +67,193 @@ public class functions
 
         return "uncaught error";
     }
-    String comparison(String s)
+    //b s n  for comparison
+    String comparison(String s, String b, String n, ArrayList charVariables, LinkedList<String> java)
     {
 
         if(s.equalsIgnoreCase("<"))
         {
-            return " < ";
+            if(java.getLast().equalsIgnoreCase(b))
+            {
+
+                java.add(s);
+                java.add(n);
+
+            }
+            else
+            {
+
+                java.add(b);
+                java.add(s);
+                java.add(n);
+            }
         }
         else if(s.equalsIgnoreCase("<="))
         {
-            return " <= ";
+            if(java.getLast().equalsIgnoreCase(b))
+            {
+
+                java.add(s);
+                java.add(n);
+
+            }
+            else
+            {
+
+                java.add(b);
+                java.add(s);
+                java.add(n);
+            }
         }
         else if(s.equalsIgnoreCase(">"))
         {
-            return " > ";
+            if(java.getLast().equalsIgnoreCase(b))
+            {
+
+                java.add(s);
+                java.add(n);
+
+            }
+            else
+            {
+
+                java.add(b);
+                java.add(s);
+                java.add(n);
+            }
         }
         else if(s.equalsIgnoreCase(">="))
         {
-            return " >= ";
+            if(java.getLast().equalsIgnoreCase(b))
+            {
+
+                java.add(s);
+                java.add(n);
+
+            }
+            else
+            {
+
+                java.add(b);
+                java.add(s);
+                java.add(n);
+            }
         }
         else if(s.equalsIgnoreCase("=="))
         {
-            return " == ";
+
+            if(charVariables.contains("b"))
+            {
+                java.add(b + ".equals(" + n + ")");
+            }
+            else {
+                java.add(b + " == " + n);
+            }
         }
         else if(s.equalsIgnoreCase("/="))
         {
-            return " != ";
+            if(charVariables.contains("b"))
+            {
+                java.add("!" + b + ".equals(" + n + ") ");
+            }
+            else {
+                java.add(b + " == " + n);
+            }
         }
-        
+
 
         return "uncaught error";
+    }
+
+    String arithmetic(String s, String b, String n, LinkedList<String> java)
+    {
+
+        if(s.equalsIgnoreCase("+"))
+        {
+            if(java.getLast().equalsIgnoreCase(b))
+            {
+
+                java.add(s);
+                java.add(n);
+
+            }
+            else
+            {
+
+                java.add(b);
+                java.add(s);
+                java.add(n);
+            }
+        }
+        if(s.equalsIgnoreCase("-"))
+        {
+            if(java.getLast().equalsIgnoreCase(b))
+            {
+
+                java.add(s);
+                java.add(n);
+
+            }
+            else
+            {
+
+                java.add(b);
+                java.add(s);
+                java.add(n);
+            }
+        }
+        if(s.equalsIgnoreCase("*"))
+        {
+            if(java.getLast().equalsIgnoreCase(b))
+            {
+
+                java.add(s);
+                java.add(n);
+
+            }
+            else
+            {
+
+                java.add(b);
+                java.add(s);
+                java.add(n);
+            }
+        }
+        if(s.equalsIgnoreCase("/"))
+        {
+            if(java.getLast().equalsIgnoreCase(b))
+            {
+
+                java.add(s);
+                java.add(n);
+
+            }
+            else
+            {
+
+                java.add(b);
+                java.add(s);
+                java.add(n);
+            }
+        }
+        if(s.equalsIgnoreCase("="))
+        {
+            if(java.getLast().equalsIgnoreCase(b))
+            {
+
+                java.add(s);
+                java.add(n);
+
+            }
+            else
+            {
+
+                java.add(b);
+                java.add(s);
+                java.add(n);
+            }
+        }
+
+        return "Uncaught error";
     }
 }
