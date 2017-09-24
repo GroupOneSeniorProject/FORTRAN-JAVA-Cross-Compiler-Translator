@@ -27,7 +27,7 @@ public class LexicalAnalyzer
             keyWords.add(keywordsArray[i]);
 
         }
-        openF95("C:\\Users\\home\\Desktop\\SP\\src\\firstDeliverable.f95"); //For IntelliJ, file must be in project root folder
+        openF95("firstDeliverable.f95"); //For IntelliJ, file must be in project root folder
         check();
     }
 
@@ -60,6 +60,7 @@ public class LexicalAnalyzer
         //Declare objects here
         functions fun = new functions();
         AssignStatement assign = new AssignStatement();
+        Arithmetic arith = new Arithmetic();
         for(int i = 0; i < Fortran.size(); i++)
         {
             String[] thisLine = Fortran.get(i).split(" ");
@@ -143,14 +144,22 @@ public class LexicalAnalyzer
                     fun.comparison(thisLine[j], thisLine[j - 1], thisLine[j + 1], charVariables, Java);
                 }
 
-                if(thisLine[j].equalsIgnoreCase("=") || thisLine[j].equalsIgnoreCase("+") ||
-                        thisLine[j].equalsIgnoreCase("-") || thisLine[j].equalsIgnoreCase("*")||
-                        thisLine[j].equalsIgnoreCase("/"))
+                if(integerVariables.contains(thisLine[j]))
                 {
+                    int temp = j;
+                    for (int k = j; k < thisLine.length; k++)
+                    {
+                        if (thisLine[k].equalsIgnoreCase("+"))
+                        {
+                            Java.add(arith.add(thisLine,j));
+                            j+=k; // Avoid looping back through to do + again
+                        }
+                    }
 
-
-                    fun.arithmetic(thisLine[j], thisLine[j - 1], thisLine[j + 1], Java);
+                    //Java.add(arith.add(thisLine, j));
                 }
+
+
 
 
             }
