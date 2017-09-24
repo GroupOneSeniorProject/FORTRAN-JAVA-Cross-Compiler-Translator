@@ -155,7 +155,7 @@ public class functions
             {
                 if(charVariables.contains(n))
                 {
-                    java.add(".equals(" + n + ")");
+                    java.add(".equals(" + n + ");");
                 }
                 else {
                     java.add(" == " + n);
@@ -163,7 +163,7 @@ public class functions
             }
             else {
                 if (charVariables.contains(n)) {
-                    java.add(b + ".equals(" + n + ")");
+                    java.add(b + ".equals(" + n + ");");
                 } else {
                     java.add(b + " == " + n);
                 }
