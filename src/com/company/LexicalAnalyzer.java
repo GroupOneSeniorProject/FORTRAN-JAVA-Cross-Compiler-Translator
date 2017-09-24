@@ -8,6 +8,12 @@ public class LexicalAnalyzer
     LinkedList<String> keyWords = new LinkedList<String>();
     LinkedList<String> Fortran = new LinkedList<String>();
     LinkedList<String> Java = new LinkedList<String>();
+    
+    ArrayList<String> integerVariables = new ArrayList<>();
+    ArrayList<String> realVariables = new ArrayList<>();
+    ArrayList<String> complexVariables = new ArrayList<>();
+    ArrayList<String> logicalVariables = new ArrayList<>();
+    ArrayList<String> charVariables = new ArrayList<>();
 
     public LexicalAnalyzer()
     {
@@ -106,6 +112,24 @@ public class LexicalAnalyzer
                     if (thisLine[j].contains("character"))
                     {
                         Java.add(assign.character(thisLine,j));
+                    }
+                    
+                    if((thisLine[j].equalsIgnoreCase("if") || thisLine[j].equalsIgnoreCase("else") || thisLine[j].equalsIgnoreCase("then")) && !thisLine[j - 1].equalsIgnoreCase("end"))
+                    {
+                        Java.add(fun.ifelse(thisLine[j]));
+                    }
+                    if(thisLine[j].equalsIgnoreCase(".eqv.") || thisLine[j].equalsIgnoreCase(".true.") ||
+                            thisLine[j].equalsIgnoreCase(".false.") || thisLine[j].equalsIgnoreCase(".not.") ||
+                            thisLine[j].equalsIgnoreCase(".and.") || thisLine[j].equalsIgnoreCase(".or.") ||
+                            thisLine[j].equalsIgnoreCase(".nequv."))
+                    {
+                        Java.add(fun.logical(thisLine[j]));
+                    }
+                    if(thisLine[j].equalsIgnoreCase("<") || thisLine[j].equalsIgnoreCase("<=") ||
+                            thisLine[j].equalsIgnoreCase(">") || thisLine[j].equalsIgnoreCase(">=") ||
+                            thisLine[j].equalsIgnoreCase("==") || thisLine[j].equalsIgnoreCase("/="))
+                    {
+                        Java.add(fun.comparison(thisLine[j]));
                     }
 
                 }
