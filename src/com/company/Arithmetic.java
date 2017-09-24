@@ -21,6 +21,21 @@ public class Arithmetic
         return build.toString() + ";";
     }
 
+    public String boolarith(String[] s, int index)
+    {
+        StringBuilder build = new StringBuilder();
+        if(s.length - index > 1) {
+            for (int i = index; i < s.length; i++) {
+                build.append(s[i]);
+
+            }
+            return build.toString() + ";";
+        }
+        else
+            return "";
+
+    }
+
     public String checkType(String[] s, int index)
     {
         for (int i = index; i < s.length; i++)
@@ -33,6 +48,8 @@ public class Arithmetic
             }
         return "";
     }
+
+
 
 
 }

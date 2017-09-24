@@ -144,6 +144,11 @@ public class LexicalAnalyzer
                     fun.comparison(thisLine[j], thisLine[j - 1], thisLine[j + 1], charVariables, Java);
                 }
 
+                if(logicalVariables.contains(thisLine[j]))
+                {
+                    //Java.add(thisLine[j]);
+                }
+
                 if(integerVariables.contains(thisLine[j]))
                 {
                     int temp = j;
@@ -152,12 +157,19 @@ public class LexicalAnalyzer
                         if (thisLine[k].equalsIgnoreCase("+"))
                         {
                             Java.add(arith.add(thisLine,j));
-                            j+=k; // Avoid looping back through to do + again
+                            j+=(k-temp); // Avoid looping back through to do + again
                         }
                     }
 
                     //Java.add(arith.add(thisLine, j));
                 }
+                if(thisLine[j].equalsIgnoreCase("bool"))
+                {
+                    Java.add(arith.boolarith(thisLine, j));
+                    j+=thisLine[j].length();
+
+                }
+
 
 
 
