@@ -66,7 +66,7 @@ public class functions
             }
             if(s[i].equalsIgnoreCase("else"))
             {
-                builder.append("\nelse\n{");
+                builder.append("}\nelse\n{");
             }
         }
             return builder.toString();
