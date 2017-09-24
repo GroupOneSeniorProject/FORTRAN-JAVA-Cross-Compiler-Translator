@@ -12,7 +12,7 @@ public class LexicalAnalyzer
     public LexicalAnalyzer()
     {
         //this is an array of all keywords through Fortran 95
-        final String[] keywordsArray = {"real", "integer", "complex", "assign", "backspace", "block data", "call", "close", "common", "continue", "data", "dimension", "do", "else", "else if", "end","endfile","endif", "entry", "equivalence", "external", "format", "function", "goto", "if", "implicit", "inquire", "intrinsic", "open", "parameter", "pause", "print", "program", "read", "return", "rewind", "rewrite", "save", "stop", "subroutine", "then", "write", "allocatable", "allocate", "case", "contains", "cycle", "deallocate", "elsewhere", "exit", "include", "interface", "intent", "module", "namelist", "nullify", "only", "operator", "optional", "pointer", "private", "procedure", "public", "recursive", "result", "select", "sequence", "target", "use", "while", "where", "elemental", "forall", "pure"};
+        final String[] keywordsArray = {"real", "integer", "complex", "character", "logical", "assign", "backspace", "block data", "call", "close", "common", "continue", "data", "dimension", "do", "else", "else if", "end","endfile","endif", "entry", "equivalence", "external", "format", "function", "goto", "if", "implicit", "inquire", "intrinsic", "open", "parameter", "pause", "print", "program", "read", "return", "rewind", "rewrite", "save", "stop", "subroutine", "then", "write", "allocatable", "allocate", "case", "contains", "cycle", "deallocate", "elsewhere", "exit", "include", "interface", "intent", "module", "namelist", "nullify", "only", "operator", "optional", "pointer", "private", "procedure", "public", "recursive", "result", "select", "sequence", "target", "use", "while", "where", "elemental", "forall", "pure"};
         Java.add(0, "import java.*;\n");
         //Use a loop to load all keywords into the list at once.
         for(int i = 0; i < keywordsArray.length; i++)
@@ -70,7 +70,7 @@ public class LexicalAnalyzer
             {
 
 
-                if(keyWords.contains(thisLine[j]))
+                if(keyWords.contains(thisLine[j]) || thisLine[j].startsWith("character"))
                 {
 
                     if (thisLine[j].equalsIgnoreCase("program") && !thisLine[0].equalsIgnoreCase("end"))
@@ -93,12 +93,27 @@ public class LexicalAnalyzer
                        Java.add(assign.integer(thisLine,j));
                     }
 
+                    if (thisLine[j].equalsIgnoreCase("real"))
+                    {
+                        Java.add(assign.real(thisLine,j));
+                    }
+
+                    if (thisLine[j].equalsIgnoreCase(("logical")))
+                    {
+                        Java.add(assign.bool(thisLine,j));
+                    }
+                    System.out.println(thisLine[j]);
+                    if (thisLine[j].contains("character"))
+                    {
+                        Java.add(assign.character(thisLine,j));
+                    }
+
                 }
 
 
             }
-            if ( i == Fortran.size()-1 )
-                Java.add("}");
+         //   if ( i == Fortran.size()-1 )
+         //       Java.add("}");
 
 
         }
