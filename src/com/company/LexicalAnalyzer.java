@@ -152,11 +152,13 @@ public class LexicalAnalyzer
                 }
 
 
+                //duplicated code, commenting out until we are sure we do not need it
+                /*
                 if(thisLine[j].equalsIgnoreCase("="))
                 {
                     fun.arithmetic(thisLine[j], thisLine[j - 1], thisLine[j + 1], Java);
                 }
-
+                */
                 
 
                 if(integerVariables.contains(thisLine[j]))
