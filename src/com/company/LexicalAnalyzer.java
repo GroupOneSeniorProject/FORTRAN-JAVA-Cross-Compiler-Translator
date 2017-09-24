@@ -108,7 +108,8 @@ public class LexicalAnalyzer
                     {
                         Java.add(assign.bool(thisLine,j, logicalVariables));
                     }
-                    System.out.println(thisLine[j]);
+                    //Unsure what this line serves other than testing
+                    //System.out.println(thisLine[j]);
                     if (thisLine[j].contains("character"))
                     {
                         Java.add(assign.character(thisLine,j, charVariables));
