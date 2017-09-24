@@ -8,7 +8,7 @@ public class LexicalAnalyzer
     LinkedList<String> keyWords = new LinkedList<String>();
     LinkedList<String> Fortran = new LinkedList<String>();
     LinkedList<String> Java = new LinkedList<String>();
-    
+
     ArrayList<String> integerVariables = new ArrayList<>();
     ArrayList<String> realVariables = new ArrayList<>();
     ArrayList<String> complexVariables = new ArrayList<>();
@@ -23,11 +23,11 @@ public class LexicalAnalyzer
         //Use a loop to load all keywords into the list at once.
         for(int i = 0; i < keywordsArray.length; i++)
         {
-            
+
             keyWords.add(keywordsArray[i]);
-            
+
         }
-        openF95("firstDeliverable.f95"); //For IntelliJ, file must be in project root folder
+        openF95("C:\\Users\\home\\Desktop\\SP\\src\\firstDeliverable.f95"); //For IntelliJ, file must be in project root folder
         check();
     }
 
@@ -41,12 +41,12 @@ public class LexicalAnalyzer
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext())
             {
-                 Fortran.add(scanner.nextLine());
+                Fortran.add(scanner.nextLine());
             }
 
             scanner.close();
             //Fortran.removeAll(Arrays.asList("", null));
-    }
+        }
         catch(Exception fileIO)
         {
             System.out.println("File IO Error!");
@@ -69,7 +69,6 @@ public class LexicalAnalyzer
             {
                 //Just a check, this is the if statement where we pass to other class.
                System.out.println(Fortran.get(i));
-
             }
 */
             for(int j = 0; j < thisLine.length; ++j)
@@ -114,11 +113,12 @@ public class LexicalAnalyzer
                     {
                         Java.add(assign.character(thisLine,j, charVariables));
                     }
-                    
+                    //pass in for if/else logic
                     if((thisLine[j].equalsIgnoreCase("if") || thisLine[j].equalsIgnoreCase("else") || thisLine[j].equalsIgnoreCase("then")) && !thisLine[j - 1].equalsIgnoreCase("end"))
                     {
                         Java.add(fun.ifelse(thisLine[j]));
                     }
+                    //pass in for logical comparisons
                     if(thisLine[j].equalsIgnoreCase(".eqv.") || thisLine[j].equalsIgnoreCase(".true.") ||
                             thisLine[j].equalsIgnoreCase(".false.") || thisLine[j].equalsIgnoreCase(".not.") ||
                             thisLine[j].equalsIgnoreCase(".and.") || thisLine[j].equalsIgnoreCase(".or.") ||
@@ -126,19 +126,36 @@ public class LexicalAnalyzer
                     {
                         Java.add(fun.logical(thisLine[j]));
                     }
+                    //pass in for numerical comparisons
                     if(thisLine[j].equalsIgnoreCase("<") || thisLine[j].equalsIgnoreCase("<=") ||
                             thisLine[j].equalsIgnoreCase(">") || thisLine[j].equalsIgnoreCase(">=") ||
                             thisLine[j].equalsIgnoreCase("==") || thisLine[j].equalsIgnoreCase("/="))
                     {
-                        Java.add(fun.comparison(thisLine[j]));
+                        fun.comparison(thisLine[j], thisLine[j - 1], thisLine[j + 1], charVariables, Java);
                     }
 
                 }
 
+                if(thisLine[j].equalsIgnoreCase("<") || thisLine[j].equalsIgnoreCase("<=") ||
+                        thisLine[j].equalsIgnoreCase(">") || thisLine[j].equalsIgnoreCase(">=") ||
+                        thisLine[j].equalsIgnoreCase("==") || thisLine[j].equalsIgnoreCase("/="))
+                {
+                    fun.comparison(thisLine[j], thisLine[j - 1], thisLine[j + 1], charVariables, Java);
+                }
+
+                if(thisLine[j].equalsIgnoreCase("=") || thisLine[j].equalsIgnoreCase("+") ||
+                        thisLine[j].equalsIgnoreCase("-") || thisLine[j].equalsIgnoreCase("*")||
+                        thisLine[j].equalsIgnoreCase("/"))
+                {
+
+
+                    fun.arithmetic(thisLine[j], thisLine[j - 1], thisLine[j + 1], Java);
+                }
+
 
             }
-         //   if ( i == Fortran.size()-1 )
-         //       Java.add("}");
+            //   if ( i == Fortran.size()-1 )
+            //       Java.add("}");
 
 
         }
