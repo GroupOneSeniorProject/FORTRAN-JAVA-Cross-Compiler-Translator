@@ -53,7 +53,7 @@ public class AssignStatement {
 
     public String character(String[] s, int index) {
         StringBuilder build = new StringBuilder();
-        System.out.println("Hi");
+        //System.out.println("Hi");
         build.ensureCapacity(100);
         build.append("String ");
         int i = index;
