@@ -96,22 +96,22 @@ public class LexicalAnalyzer
 
                     if (thisLine[j].equalsIgnoreCase("integer"))//equalsIgnoreCase("integer"))
                     {
-                       Java.add(assign.integer(thisLine,j));
+                        Java.add(assign.integer(thisLine,j, integerVariables));
                     }
 
                     if (thisLine[j].equalsIgnoreCase("real"))
                     {
-                        Java.add(assign.real(thisLine,j));
+                        Java.add(assign.real(thisLine,j, realVariables));
                     }
 
                     if (thisLine[j].equalsIgnoreCase(("logical")))
                     {
-                        Java.add(assign.bool(thisLine,j));
+                        Java.add(assign.bool(thisLine,j, logicalVariables));
                     }
                     System.out.println(thisLine[j]);
                     if (thisLine[j].contains("character"))
                     {
-                        Java.add(assign.character(thisLine,j));
+                        Java.add(assign.character(thisLine,j, charVariables));
                     }
                     
                     if((thisLine[j].equalsIgnoreCase("if") || thisLine[j].equalsIgnoreCase("else") || thisLine[j].equalsIgnoreCase("then")) && !thisLine[j - 1].equalsIgnoreCase("end"))
