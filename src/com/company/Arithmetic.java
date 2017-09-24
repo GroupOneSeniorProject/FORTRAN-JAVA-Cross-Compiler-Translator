@@ -18,7 +18,7 @@ public class Arithmetic
 
             build.append(s[i]);
         }
-        return build.toString();
+        return build.toString() + ";";
     }
 
     public String checkType(String[] s, int index)
