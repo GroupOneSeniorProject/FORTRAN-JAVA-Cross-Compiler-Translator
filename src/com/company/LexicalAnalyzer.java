@@ -175,7 +175,7 @@ public class LexicalAnalyzer
                 if(logicalVariables.contains(thisLine[j]))
                 {
                     Java.add(arith.boolarith(thisLine, j));
-                    j+=thisLine[j].length();
+                    j+=2;
 
                 }
 
