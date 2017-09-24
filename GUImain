@@ -1,0 +1,51 @@
+private File file = null;
+private File dest = new File("C:\\Users\\Nelsosn Tsaku\\Desktop\\go.txt");
+
+
+public static void main(String[] args) {
+
+        // TODO code application logic here
+        // This is the main function for the GUI.java class which contains all GUI functions
+        JFrame newJf = new JFrame("Java 2 Fortran Compiler");
+        newJf.setContentPane(new GUI());
+        newJf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        newJf.pack();
+        newJf.setVisible(true);
+
+}
+
+//look into your GUI.java class for the method below "private void JFileChooser1ActionPerformed(java.awt.event.ActionEvent evt)" and inset the following code
+ private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+        // TODO add your handling code here:
+        
+        int returnVal = JFileChooser.APPROVE_OPTION;
+        System.out.print(returnVal);
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+            file = jFileChooser1.getSelectedFile();
+        
+         // Launch the fortran compiler method here with file as input:
+       
+         //suppose the resulting file with java code is jOut 
+         //this set of code prints content of out in jTextArea1
+        
+       // JTextArea text = new JTextArea();
+        try{
+        BufferedReader in = new BufferedReader(new FileReader(jOut));
+        String line = in.readLine();
+        while(line != null){
+
+            jTextArea1.append(line + "\n");
+            line = in.readLine();
+        }
+    }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    //this code chages the destination of the output file to the destination of the give private dest file
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Boolean success =  file.renameTo(dest);
+    }//GEN-LAST:event_jButton1ActionPerformed
