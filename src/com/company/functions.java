@@ -50,22 +50,27 @@ public class functions
 
         return "uncaught error";
     }
-    String ifelse(String s)
-    {
-        if(s.equalsIgnoreCase("if"))
-        {
-            return "if(";
-        }
-        else if(s.equalsIgnoreCase("then"))
-        {
-            return ")\n{";
-        }
-        else if(s.equalsIgnoreCase("else"))
-        {
-            return "}\nelse\n{";
-        }
+    String ifelse(String[] s) {
+        StringBuilder builder = new StringBuilder();
+        boolean start = false;
 
-        return "uncaught error";
+        for (int i = 0; i < s.length; i++) {
+
+            if (s[i].equalsIgnoreCase("if")) {
+                return "if(";
+            }
+
+            if(s[i].equalsIgnoreCase("else"))
+            {
+                builder.append("else\n{");
+            }
+        }
+            return builder.toString();
+
+
+
+        //return "uncaught error";
+
     }
     //b s n  for comparison
     String comparison(String s, String b, String n, ArrayList charVariables, LinkedList<String> java)
