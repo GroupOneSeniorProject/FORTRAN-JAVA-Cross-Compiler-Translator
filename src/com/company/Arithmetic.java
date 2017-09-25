@@ -25,11 +25,11 @@ public class Arithmetic
     {
         StringBuilder build = new StringBuilder();
         if(s.length - index > 1) {
-            for (int i = index; i < s.length; i++) {
+            for (int i = index; i < index + 2; i++) {
                 build.append(s[i]);
 
             }
-            return build.toString() + ";";
+            return build.toString() + " ";
         }
         else
             return "";
