@@ -7,13 +7,15 @@ public class AssignStatement {
     public AssignStatement() {
 
     }
-
+    //building integer initialization and declaration
     public String integer(String[] s, int index, ArrayList<String> integer) {
         StringBuilder build = new StringBuilder();
         build.ensureCapacity(100);
         // build.append("int ");
         for (int i = index; i < s.length; i++) {
-            if (!(s[i].equalsIgnoreCase("::") || s[i].equalsIgnoreCase("integer") || s[i].equalsIgnoreCase(",") || s[i].equalsIgnoreCase("=") || s[i].equalsIgnoreCase("0"))) {
+            if (!(s[i].equalsIgnoreCase("::") || s[i].equalsIgnoreCase("integer") ||
+                    s[i].equalsIgnoreCase(",") || s[i].equalsIgnoreCase("=")
+                    || s[i].equalsIgnoreCase("0"))) {
                 build.append("int "+s[i].replace(",","") + " = 0;\n");
                 integer.add(s[i].replace(",",""));
             }
@@ -23,7 +25,7 @@ public class AssignStatement {
 
         return build.toString();
     }
-
+    //building double initialization and declaration
     public String real(String[] s, int index,  ArrayList<String> real) {
         StringBuilder build = new StringBuilder();
         build.ensureCapacity(100);
@@ -38,6 +40,7 @@ public class AssignStatement {
 
         return build.toString();
     }
+    //building boolean initilazation and declaration
     public String bool(String[] s, int index,  ArrayList<String> logical) {
         StringBuilder build = new StringBuilder();
         build.ensureCapacity(100);
@@ -55,7 +58,7 @@ public class AssignStatement {
 
         return build.toString();
     }
-
+    //string init and declare
     public String character(String[] s, int index,  ArrayList<String> character) {
         StringBuilder build = new StringBuilder();
         //System.out.println("Hi");
@@ -70,7 +73,7 @@ public class AssignStatement {
             {
                 if (!(s[i].equalsIgnoreCase("::") || s[i].equalsIgnoreCase("character"))) {
                     build.append(s[i] + " ");
-                    character.add(s[i]);
+                    character.add(s[i].replace(",",""));
 
                 }
             }

@@ -7,8 +7,9 @@ public class functions
     {
 
     }
+    //begin program
     String startprogram(String s) {
-        String thisProgram = "public class " + s + "\n{\n public static void main(String[] args)\n{\n";
+        String thisProgram = "public class " + s + "\n{\n public static void main(String[] args)\n{\nScanner scanner = new Scanner(System.in);\n";
         return thisProgram;
     }
     String endprogram(String s)
@@ -16,6 +17,7 @@ public class functions
         return "}\n";
     }
 
+    //handle instances of logical comparison
     String logical(String s)
     {
         String result = "";
@@ -50,6 +52,7 @@ public class functions
 
         return "uncaught error";
     }
+    //handle if/else logic
     String ifelse(String[] s) {
         StringBuilder builder = new StringBuilder();
         boolean start = false;
@@ -69,13 +72,14 @@ public class functions
                 builder.append("}\nelse\n{");
             }
         }
-            return builder.toString();
+        return builder.toString();
 
 
 
         //return "uncaught error";
 
     }
+    //comparison operators, b = before, s = current, n = next
     //b s n  for comparison
     String comparison(String s, String b, String n, ArrayList charVariables, LinkedList<String> java)
     {
@@ -183,6 +187,10 @@ public class functions
 
         return "uncaught error";
     }
+
+    //comparison operators, b = before, s = current, n = next
+    //b s n  for comparison
+    //checking to ensure that the previous item is not already in the list
 
     String arithmetic(String s, String b, String n, LinkedList<String> java)
     {

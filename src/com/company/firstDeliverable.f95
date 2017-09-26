@@ -23,19 +23,19 @@ program firstDeliverable
         print *, "Enter a second word of six letters or less"
 
         read *, string2
-        
+
         bool = string1 == string2
 
         if (bool) then
-        
+
         print *, "The words entered are identical"
 
         else
-        
+
         print *, "The words entered are different"
 
         end if
 
-        
+
 
 end program firstDeliverable

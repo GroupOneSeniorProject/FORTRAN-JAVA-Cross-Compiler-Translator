@@ -8,7 +8,7 @@ public class Arithmetic
     {
 
     }
-
+    //building the string for addition
     public String add(String[] s, int index)
     {
         StringBuilder build = new StringBuilder();
@@ -20,7 +20,7 @@ public class Arithmetic
         }
         return build.toString() + ";";
     }
-
+    //building the string for boolean assignment
     public String boolarith(String[] s, int index)
     {
         StringBuilder build = new StringBuilder();
