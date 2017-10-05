@@ -1,79 +1,34 @@
-1st deliverable:
+2nd Deliverable:
 
-Print statements
-Basic data types + assignments
-Basic Arithmetic
-Hello World!
+for loops - Nelson
 
-We need to build the lexical analyzer before anything else.
-Remember to separate actual translation and implementation into their appropriate classes
+java equivalent of long, int, short, double - John
 
-Lexical analyzer structure:
+proper java imports ( no java.* ) - John
 
-Build a list of fortran code delimited by whitespace.
-Hardcode keywords list
-Create token(maybe)
-Token example:
+trig functions and abs sqrt log http://docs.oracle.com/cd/E19422-01/819-3684/2_F95_Intrins.html  https://docs.oracle.com/cd/E17904_01/apirefs.1111/e12048/functmath.htm#CQLLR413 -Elizabeth
 
- program test
- implicit none
- print *, "Hello World"
- end program test
- 
- Tokens to
- 
- <Key>program
- <Other>test
- <Key>implicit
- <Other>none
- <Key>print
- <Other>*
- <Other>,
- <Other>"Hello
- <Other>World"
- <Key>end
- <Key>program
- <Other>test
- 
- 
- Tokenizing something like print *, "1 print 2" is too complicated for this deliverable, and will be done later
- 
-Fortran           Key Word
-Delimit              List
-List
--------           -------
-|     |           |     |
-|     |           |     |
-|     |           |     |
-|     |           |     |    Yes
-|     |---------->|     |----------><Key>
-|     |           |     |
-|     |           |     |  No    
-|     |           |     |----------><Other>
--------           -------     
-    
-    Token
-    List
-    -------       --------------> [Appropriate_Class]
-    |     |       |      Yes
-    |     | <key> |
-    |     |-------
-    |     |       |
-    |     |       |     No
-    -------       --------------> <Other> must be arithmatic operator, variable name, etc. Assign new token. Push to 
-                                                                                    appropriate class.
-                                                                                    
-                                                                                    
-   Assigned tasks
-   
-   GUI implementation: Nelson
-   Assignment statements: Johnathon
-   arithmatic operators: Johnathon
-   comparison operators: Heath
-   print: Liz
-   I/O: Wes
-   conditionals: Heath
-   
-   Powerpoint: Nelson
-                                                                                    
-                                          
+Indentation - Heath
+
+
+-Arraylist of copypasted functions such as trig abs sqrt. Anything similar to simplify code conversion.
+
+
+
+
+functions - Wes
+
+fortran deliverable file
+- Show loops by printing incrementing variable
+- Show if else elseif logic
+- Basic scientific calculator
+- Different functions for each sqrt log trig whatever
+
+
+fortran function sqrt
+fortran function log
+
+
+
+
+
