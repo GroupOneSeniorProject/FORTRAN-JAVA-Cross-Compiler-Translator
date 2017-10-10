@@ -29,14 +29,16 @@ public class AssignStatement {
     public String real(String[] s, int index,  ArrayList<String> real) {
         StringBuilder build = new StringBuilder();
         build.ensureCapacity(100);
-        build.append("double ");
+        //build.append("double ");
         for (int i = index; i < s.length; i++) {
-            if (!(s[i].equalsIgnoreCase("::") || s[i].equalsIgnoreCase("double"))) {
-                build.append(s[i] + " ");
+            if (!(s[i].equalsIgnoreCase("::") || s[i].equalsIgnoreCase("real") ||
+            		s[i].equalsIgnoreCase(",") || s[i].equalsIgnoreCase("=")
+            		|| s[i].equalsIgnoreCase("0"))) {
+                build.append("double " +s[i].replaceAll(",", "") + " = 0;\n" );
                 real.add(s[i].replace(",",""));
             }
         }
-        build.append(";");
+        //build.append(";");
 
         return build.toString();
     }
