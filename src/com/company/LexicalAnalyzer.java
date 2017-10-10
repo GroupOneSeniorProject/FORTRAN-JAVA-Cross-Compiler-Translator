@@ -30,9 +30,9 @@ public class LexicalAnalyzer
                 "allocate", "case", "contains", "cycle", "deallocate", "elsewhere", "exit", "include", "interface", 
                 "intent", "module", "namelist", "nullify", "only", "operator", "optional", "pointer", "private", 
                 "procedure", "public", "recursive", "result", "select", "sequence", "target", "use", "while", "where", 
-                "elemental", "forall", "pure"};
+                "elemental", "forall", "pure", "real"};
         
-        Java.add(0, "import java.util.*;\n");
+        //Java.add(0, "import java.util.*;\n");
         //Use a loop to load all keywords into the list at once.
         for(int i = 0; i < keywordsArray.length; i++)
         {
@@ -112,12 +112,14 @@ public class LexicalAnalyzer
                 String y = ioHandler.printFunction(tokens);
                 Java.add(y);
             } else if (!tokens.isEmpty() && tokens.get(0).equalsIgnoreCase("read")) {
+            	if(!Java.getFirst().equalsIgnoreCase("import java.util.Scanner;"))
+            		Java.addFirst("import java.util.Scanner;");
                 IOHandler ioHandler = new IOHandler();
                 ioHandler.readFunction(integerVariables, realVariables, charVariables, logicalVariables, complexVariables, tokens, Java);
             } else {
                 //Loop to process keywords
-                for (int j = 0; j < thisLine.length; ++j) {
-
+                for (int j = 0; j < thisLine.length; j++) {
+                	System.out.println(thisLine[j]);
 
                     if (keyWords.contains(thisLine[j]) || thisLine[j].startsWith("character")) {
 
@@ -130,7 +132,8 @@ public class LexicalAnalyzer
 
                             System.out.println();
 
-                        } else if (thisLine[j].equalsIgnoreCase("end")) {
+                        } 
+                        else if (thisLine[j].equalsIgnoreCase("end")) {
                             Java.add(fun.endprogram(thisLine[j + 1]));
                         }
 
@@ -138,8 +141,10 @@ public class LexicalAnalyzer
                         {
                             Java.add(assign.integer(thisLine, j, integerVariables));
                         }
-
-                        if (thisLine[j].equalsIgnoreCase("real")) {
+              
+                        if (thisLine[j].contains("real")) 
+                        {
+                        	
                             Java.add(assign.real(thisLine, j, realVariables));
                         }
 
