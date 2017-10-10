@@ -1,0 +1,10 @@
+Wes, here are the thoughts we had over Functions and Subroutines, please implement what you feel is needed, and let us know what you need help with:
+
+All function variables should have the same name as their main program counterparts for simplicity.
+
+All variables that are passed into any function should be declared as global variables, so that the methods can modify them.
+
+We were thinking that a two-pass system may work better, on the first pass through the fortran code, identify the global variables, and assemble a list, and then on the second begin working with the code, declaring global variables up-front and others normally.
+
+Alternative Option: Declare all variables as global, at least for this deliverable, and fix it to be more elegant on the next deliverable.
+
