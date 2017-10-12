@@ -1,3 +1,15 @@
+real function functest(z, x)
+
+        implicit none
+
+        real, intent(in) :: z, x
+
+        functest = z ** z
+
+        return
+
+end function functest
+
 program secondDeliverable
 
         implicit none
@@ -5,6 +17,8 @@ program secondDeliverable
         integer :: a, b, c = 0
 
         real :: x, y, z = 0
+
+        real, external :: functest
 
         character(len=6) :: string1, string2
 
@@ -63,6 +77,14 @@ program secondDeliverable
         print *, "The Cos of Y is ", y
 
         print *, "The Absolute Value of Z is ", z
+
+        print *, "X is ", x
+
+        z = functest(z, x)
+
+        print *, "X is ", x
+
+        print *, "Z ** Z is ", z
 
         
 
