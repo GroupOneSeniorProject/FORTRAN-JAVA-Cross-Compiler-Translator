@@ -10,7 +10,7 @@ public class forLoop {
 */
     String forloop(String[] s){
         StringBuilder builder = new StringBuilder();
-    if (s[1].equals("DO")) // interprets the lines for DO call in function
+    if (s[1].equalsIgnoreCase("DO")) // interprets the lines for DO call in function
     {
         for (int i = 0; i < s.length; i++) {
 
