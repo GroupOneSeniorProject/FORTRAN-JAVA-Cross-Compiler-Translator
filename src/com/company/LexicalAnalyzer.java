@@ -15,6 +15,7 @@ public class LexicalAnalyzer
     ArrayList<String> complexVariables = new ArrayList<>();
     ArrayList<String> logicalVariables = new ArrayList<>();
     ArrayList<String> charVariables = new ArrayList<>();
+    ArrayList<String> globalVariables = new ArrayList<>();
 
     String fileName = "";
 
