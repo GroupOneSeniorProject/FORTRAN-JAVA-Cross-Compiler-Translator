@@ -74,6 +74,18 @@ public class LexicalAnalyzer
         functions fun = new functions();
         AssignStatement assign = new AssignStatement();
         Arithmetic arith = new Arithmetic();
+        
+        fun.identifyGlobalVariables(globalVariables, Fortran);
+
+        //testing
+        /*
+        for(int i = 0; i < globalVariables.size(); i++) {
+            System.out.println(globalVariables.get(i));
+        }
+        */
+        //end testing
+        
+        
         for(int i = 0; i < Fortran.size(); i++) {
 
             String[] thisLine = Fortran.get(i).split(" ");
