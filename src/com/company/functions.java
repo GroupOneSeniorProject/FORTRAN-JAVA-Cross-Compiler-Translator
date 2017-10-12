@@ -283,4 +283,114 @@ public class functions
 
         return "Uncaught error";
     }
-}
+
+    void identifyGlobalVariables(ArrayList<String> globalVariables, LinkedList<String> Fortran)
+    {
+
+        int index1 = 0;
+
+        int index2 = 0;
+
+        boolean globalsPresent = false;
+
+        boolean inParenth = false;
+
+        String global = "";
+
+        for(int i = 0; i < Fortran.size(); i++)
+        {
+
+            String[] line = Fortran.get(i).split(" ");
+
+
+            for(int j = 0; j < line.length; j++)
+            {
+                if(!line[j].equalsIgnoreCase(""))
+                {
+                //want the form "subroutine(....)" not "end subroutine"
+                if(line[j].equalsIgnoreCase("subroutine") && !line[j - 1].equalsIgnoreCase("end"))
+                {
+                    globalsPresent = true;
+                    j++;
+                }
+                //if we are inside the parentheses
+                if(globalsPresent) {
+                    //walk along the characters in the string
+                    for (int k = 0; k < line.length; k++) {
+                        //if open paren
+                        if (line[j].length() > k && line[j].charAt(k) == '(') {
+
+                            inParenth = true;
+                            index1 = k + 1;
+                            //if open paren followed by comma (muliple variables
+                            if (line[j].length() >= k && line[j].charAt(line[j].length() - 1) == ',') {
+                                globalVariables.add(line[j].substring(index1, line[j].length() - 1));
+                            }
+                            //if open paren followed by close paren (single variable)
+                            if (line[j].length() > k && line[j].charAt(line[j].length() - 1) == ')' && line[j].length() > 2) {
+
+                                globalVariables.add(line[j].substring(index1, line[j].length() - 1));
+                                globalsPresent = false;
+
+                            }
+
+                        }
+                        //if close paren (end of variables)
+                        else if (line[j].length() > k && line[j].charAt(line[j].length() - 1) == ')') {
+
+                            if (line[j].length() > 1) {
+
+                                globalVariables.add(line[j].substring(0, line[j].length() - 1));
+
+                            }
+
+                            globalsPresent = false;
+                            break;
+
+                        }
+                        //if not open or close (more than two variables)
+                        else {
+
+                            if (line[j].length() > k && line[j].charAt(line[j].length() - 1) == ',') {
+
+                                index2 = k;
+
+                                for(int l = 0; l < line[j].length(); l++)
+                                {
+
+                                    if(line[j].charAt(l) == '(')
+                                    {
+                                        index2 = l;
+                                        k = l;
+                                    }
+
+                                }
+
+                                globalVariables.add(line[j].substring(index2 + 1, line[j].length() - 1));
+
+                            } else if (line[j].length() >= k && line[j].charAt(0) == ',') {
+
+                                globalVariables.add(line[j].substring(1, line[j].length()));
+
+                            } else {
+
+                                globalVariables.add(line[j]);
+
+                            }
+
+                        }
+
+
+                    }
+
+                }
+
+                }
+
+            }
+
+
+        }
+
+    }
+}    
