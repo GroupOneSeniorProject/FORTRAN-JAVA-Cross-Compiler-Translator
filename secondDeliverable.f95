@@ -1,20 +1,8 @@
-real function functest(z, x)
-
-        implicit none
-
-        real, intent(in) :: z, x
-
-        functest = z ** z
-
-        return
-
-end function functest
-
 program secondDeliverable
 
         implicit none
 
-        integer :: a, b, c = 0
+        integer :: a, b, c, acc, intake = 0
 
         real :: x, y, z = 0
 
@@ -86,6 +74,32 @@ program secondDeliverable
 
         print *, "Z ** Z is ", z
 
-        
+        intake = 1
+
+        acc = 0
+
+        do while(intake /= 0)
+
+        print *, "Enter an integer to add to total. Entry ends with 0 "
+
+        read *, intake
+
+        acc = acc +  intake
+
+        end do 
+
+        print *, "The sum is ", acc
 
 end program secondDeliverable
+
+real function functest(z, x)
+
+        implicit none
+
+        real, intent(in) :: z, x
+
+        functest = z ** z
+
+        return
+
+end function functest
