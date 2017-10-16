@@ -180,7 +180,7 @@ public class functions
                 java.add("!" + b + ".equals(" + n + ") ");
             }
             else {
-                java.add(b + " == " + n);
+                java.add(b + " != " + n);
             }
         }
 
