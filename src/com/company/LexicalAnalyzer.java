@@ -238,17 +238,48 @@ public class LexicalAnalyzer
             }
         }
         //write to file
-        try {
-            PrintWriter printWriter = new PrintWriter(fileName + ".java");
-            for (String s : Java) {
-                printWriter.println(s);
-            }
-            printWriter.println("}");
-            printWriter.close();
-        } catch (Exception ex) {
-            System.out.println(ex);
+try {
+      PrintWriter printWriter = new PrintWriter(fileName + ".java");
+
+      int indentLevel = 0;
+      String temp = "";
+      String currentTab = "";
+      StringBuilder builder = new StringBuilder();
+
+      for (String s : Java) {
+          builder.setLength(0);
+          if(s.contains("}"))
+          {
+              indentLevel--;
+          }
+          for(int i = 0; i < indentLevel; i++)
+          {
+              builder.append("\t");
+          }
+          currentTab = builder.toString();
+          builder.setLength(0);
+          builder.append(currentTab);
+          temp = s.replace("\n", "\n" + currentTab);
+          builder.append(temp);
+
+        printWriter.println(builder.toString());
+
+        if(s.contains("while") || s.contains("for") || s.contains("if ") || s.contains("else"))
+        {
+          indentLevel++;
         }
+        if(s.contains("class"))
+        {
+            indentLevel = 2;
+        }
+
+      }
+      printWriter.println("}");
+      printWriter.close();
+    } catch (Exception ex) {
+      System.out.println(ex);
     }
+  }
 
     public int ignoreWhitespace(int start, int size, String[] s)
     {
