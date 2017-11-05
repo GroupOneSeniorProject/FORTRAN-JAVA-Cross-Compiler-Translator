@@ -83,6 +83,41 @@ public class AssignStatement {
         build.append(";");
         return build.toString();
     }
+    
+      public String intArray(String[] s, int index,  ArrayList<String> character)
+  {
+    StringBuilder builder = new StringBuilder();
+
+    builder.ensureCapacity(100);
+    String arrLen = "";
+    for(int i = 0; i < s.length; i++)
+    {
+      if(s[i].equalsIgnoreCase("integer,"))
+      {
+        builder.append("int[]");
+      }
+      if(s[i].contains("dimension"))
+      {
+        int first = s[i].indexOf('(');
+        int second = s[i].indexOf(')');
+        arrLen = s[i].substring(first + 1, second);
+        //builder.append("[" + arrLen + "]");
+      }
+      if (!s[i].equalsIgnoreCase(" ") && !s[i].contains("dimension") && !s[i].equalsIgnoreCase("::") &&
+              !s[i].contains("integer"))
+      {
+
+        builder.append(" " + s[i].replaceAll(",", ""));
+
+      }
+
+    }
+
+    builder.append(" = new int[" + arrLen + "];");
+
+    return builder.toString();
+
+  }
 
 
 }
