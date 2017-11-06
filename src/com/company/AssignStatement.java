@@ -12,13 +12,13 @@ public class AssignStatement {
 
     StringBuilder build = new StringBuilder();
     build.ensureCapacity(100);
-    globals.add("a");
+    //globals.add("a");
     //globals.add("b");
-    globals.add("z");
-    globals.add("bool");
-    globals.add("string1");
+    //globals.add("z");
+    //globals.add("bool");
+    //globals.add("string1");
 
-    build.append("int ");
+    //build.append("int ");
     for (int i = index; i < s.length; i++) {
       if (!(globals.contains(s[i]) || s[i].equalsIgnoreCase("::") || s[i].equalsIgnoreCase("integer") ||
               s[i].equalsIgnoreCase(",") || s[i].equalsIgnoreCase("=")
@@ -67,6 +67,7 @@ public class AssignStatement {
         {
           build.append("doubleWrapper " + globals.get(i) + " = new doubleWrapper();\n");
           int temp = build.indexOf("double " +globals.get(i)+ " = 0;");
+          if(temp >= 0)
           build.replace(temp, temp+j+1, "");
         }
       }
@@ -106,7 +107,7 @@ public class AssignStatement {
     }
 
 
-
+    build.append(";");
     return build.toString();
   }
   //string init and declare
