@@ -20,10 +20,15 @@ public class LexicalAnalyzer
   ArrayList<String> charVariables = new ArrayList<>();
   ArrayList<String> globalVariables = new ArrayList<>();
 
-    ArrayList<String> functionNames = new ArrayList<>();
+  ArrayList<String> functionNames = new ArrayList<>();
   ArrayList<Integer> functionParameterLocations = new ArrayList<>();
   Queue<Integer> numberOfParameters = new LinkedList<>();
   Queue<String> parameterVariables = new LinkedList<>();
+
+    int numImports = 0;
+
+
+    boolean mainFinishedFlag;
 
   String fileName = "";
 
@@ -83,7 +88,9 @@ public class LexicalAnalyzer
     functions fun = new functions();
     AssignStatement assign = new AssignStatement();
     Arithmetic arith = new Arithmetic();
-
+    Math_func2 javaMath = new Math_func2();
+    forLoop loop = new forLoop();
+    mainFinishedFlag = false;
     fun.identifyGlobalVariables(globalVariables, Fortran);
 
     //testing
@@ -128,7 +135,14 @@ public class LexicalAnalyzer
       //This is done to ensure that if keywords are part of a String in print or read that they are treated as part
       //of the String and not as a keyword to be processed by the LexicalAnalyzer
 
+        if(tokens.size() >= 2 && tokens.get(0).equalsIgnoreCase("end") && tokens.get(1).equalsIgnoreCase("program"))
+            mainFinishedFlag = true;
 
+
+        if(!tokens.isEmpty() && tokens.get(0).equalsIgnoreCase("contains"))
+        {
+            continue;
+        }
 
       if (!tokens.isEmpty() && tokens.get(0).equalsIgnoreCase("print")) {
         IOHandler ioHandler = new IOHandler();
@@ -149,8 +163,29 @@ public class LexicalAnalyzer
       } else if (tokens.size() > 2 && tokens.get(1).contains("intent")){
           continue;
       }
+
+
       //Check to see if thisLine is a function declaration
       else if(tokens.size() > 2 && tokens.get(1).equalsIgnoreCase("function") && !tokens.get(0).equalsIgnoreCase("end")){
+            if (!mainFinishedFlag) {
+                boolean funcFlag = true;
+                while (funcFlag) {
+
+                    String tempLine = Fortran.get(i);
+                    String[] tempArray = tempLine.split(" ");
+                    ArrayList<String> tempTokens = new ArrayList<>();
+                    for (String s : tempArray) {
+                        if (!s.isEmpty())
+                            tempTokens.add(s);
+                    }
+                    Fortran.remove(i);
+                    Fortran.add(tempLine);
+                    if (!tempTokens.isEmpty() && tempTokens.get(0).equalsIgnoreCase("end"))
+                        funcFlag = false;
+                }
+                continue;
+            }
+
           //Add static because calling from static setting
           String functionBuilder = "static ";
           //Determine return type
@@ -185,11 +220,11 @@ public class LexicalAnalyzer
           Java.add("");
           //Declare variable to be returned
           if(tokens.get(0).equalsIgnoreCase("real"))
-              Java.add("double returnVariable");
+              Java.add("double returnVariable;");
           else if(tokens.get(0).equalsIgnoreCase("integer"))
-              Java.add("int returnVariable");
+              Java.add("int returnVariable;");
           else
-              Java.add("boolean returnVariable");
+              Java.add("boolean returnVariable;");
           Java.add("");
       }
       //Replace Fortran function name with returnVariable in statements
@@ -203,12 +238,15 @@ public class LexicalAnalyzer
             }*/
       //Add return statement for returnVariable
       else if(tokens.size() == 1 && tokens.get(0).equalsIgnoreCase("return")){
-          Java.add("return returnVariable");
+          Java.add("return returnVariable;");
       }
       else {
         //Loop to process keywords
         for (int j = 0; j < thisLine.length; j++) {
           System.out.println(thisLine[j]);
+//TODO CHECK THIS
+            if(functionNames.contains(thisLine[j]))
+                thisLine[j] = "returnVariable";
 
           if (keyWords.contains(thisLine[j]) || thisLine[j].startsWith("character") || keyWords.contains(thisLine[j].replace(",",""))) {
 
@@ -294,13 +332,10 @@ public class LexicalAnalyzer
           }
 
 
-          //duplicated code, commenting out until we are sure we do not need it
-                /*
-                if(thisLine[j].equalsIgnoreCase("="))
-                {
-                    fun.arithmetic(thisLine[j], thisLine[j - 1], thisLine[j + 1], Java);
-                }
-                */
+            if(thisLine[j].equalsIgnoreCase("**"))
+            {
+                fun.arithmetic(thisLine[j], thisLine[j - 1], thisLine[j + 1], Java);
+            }
 
           //if an integer
           if (integerVariables.contains(thisLine[j])) {
@@ -310,7 +345,7 @@ public class LexicalAnalyzer
                 Java.add(arith.add(thisLine, j));
                 j += (k - temp); // Avoid looping back through to do + again
               }
-                
+
                 //TODO ADD ALL OTHER MATH OPERATORS
 
             }
@@ -323,6 +358,50 @@ public class LexicalAnalyzer
             j += 2;
 
           }
+
+
+            if(j < thisLine.length && (thisLine[j].contains("abs(") || thisLine[j].contains("sin(") || thisLine[j].contains("cos(") || thisLine[j].contains("tan(") ||
+                    thisLine[j].contains("log(") || thisLine[j].contains("sqrt(")))
+            {
+                Java.add(javaMath.func(thisLine, j));
+                j = thisLine.length;
+            }
+
+            if(j < thisLine.length && thisLine[j].equalsIgnoreCase("="))
+            {
+                Java.add(fun.assignmentStatement(thisLine, j));
+            }
+
+            if(j < thisLine.length && thisLine[j].contains("while"))
+            {
+                Java.add(loop.whileLoop(thisLine, j));
+                j = thisLine.length;
+            }
+
+            int firstIndex = 0;
+
+
+            if(j < thisLine.length && thisLine[j].indexOf('(') >= 0 && !thisLine[j].contains("character")){
+                Java.add(fun.functionReturn(thisLine, j));
+            }
+
+            if(j < thisLine.length && fun.isNumeric(thisLine[j]))
+            {
+                boolean isDeclaration = false;
+
+                for (int l = 0; l < thisLine.length; l++){
+                    if(thisLine[l].equalsIgnoreCase("::")){
+                        isDeclaration = true;
+                    }
+                }
+                if(!isDeclaration)
+                    Java.add(thisLine[j] + ";");
+            }
+
+            if(j < thisLine.length && thisLine[j].contains("!"))
+            {
+                Java.add(fun.comments(thisLine, j));
+            }
 
 
         }
@@ -410,4 +489,6 @@ public class LexicalAnalyzer
     }
     return 0;
   }
+
+
 }
