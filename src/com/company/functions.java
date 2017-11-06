@@ -359,6 +359,11 @@ public class functions
       }
     }
 
+    if(s.equalsIgnoreCase("**"))
+    {
+      java.add("Math.pow(" + b + ", " + n +");");
+    }
+
     return "Uncaught error";
   }
 
@@ -470,5 +475,75 @@ public class functions
 
     }
 
+  }
+
+  String assignmentStatement(String[] s, int index)
+  {
+
+    for(int i = 0; i < s.length; i++)
+    {
+      if(s[i].equalsIgnoreCase("::"))
+      {
+        return "";
+      }
+
+    }
+
+    StringBuilder builder = new StringBuilder();
+
+    builder.append(s[index - 1]);
+    builder.append(s[index]);
+
+    return builder.toString();
+  }
+
+  String functionReturn(String[] s, int index)
+  {
+    boolean isDeclaration = false;
+
+    for (int i = 0; i < s.length; i++){
+      if(s[i].equalsIgnoreCase("::")){
+        isDeclaration = true;
+      }
+    }
+    if(!isDeclaration) {
+      StringBuilder builder = new StringBuilder();
+
+      for (int i = index; i < s.length; i++) {
+        builder.append(s[i] + " ");
+      }
+
+      builder.append(";");
+
+      return builder.toString();
+    }
+    else{
+      return "";
+    }
+  }
+  public static boolean isNumeric(String str)
+  {
+    return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+  }
+
+  String comments(String[] s, int index)
+  {
+    StringBuilder builder = new StringBuilder();
+
+    String temp;
+    for(int i = index; i < s.length; i++){
+      temp = s[i].replaceAll("!", "//");
+      builder.append(" " + temp);
+    }
+
+    return builder.toString();
+  }
+
+  String arrayProc(String[] s, int index){
+    StringBuilder builder = new StringBuilder();
+
+
+
+    return builder.toString();
   }
 }    
