@@ -266,7 +266,7 @@ public class LexicalAnalyzer
 
             if (thisLine[j].equalsIgnoreCase("integer"))//equalsIgnoreCase("integer"))
             {
-              Java.add(assign.integer(thisLine, j, integerVariables));
+              Java.add(assign.integer(thisLine, j, integerVariables, globalVariables));
             }
 
             if (thisLine[j].equalsIgnoreCase("integer,"))
@@ -278,7 +278,7 @@ public class LexicalAnalyzer
             if (thisLine[j].equalsIgnoreCase("real"))
             {
 
-              Java.add(assign.real(thisLine, j, realVariables));
+              Java.add(assign.real(thisLine, j, realVariables, globalVariables));
             }
 
               if (thisLine[j].equalsIgnoreCase("real,"))
@@ -288,7 +288,7 @@ public class LexicalAnalyzer
               }
 
             if (thisLine[j].equalsIgnoreCase(("logical"))) {
-              Java.add(assign.bool(thisLine, j, logicalVariables));
+              Java.add(assign.bool(thisLine, j, logicalVariables, globalVariables));
             }
 
               if (thisLine[j].equalsIgnoreCase(("logical,"))) {
@@ -297,7 +297,7 @@ public class LexicalAnalyzer
             //Unsure what this line serves other than testing
             //System.out.println(thisLine[j]);
             if (thisLine[j].contains("character")) {
-              Java.add(assign.character(thisLine, j, charVariables));
+              Java.add(assign.character(thisLine, j, charVariables, globalVariables));
             }
             //pass in for if/else logic
             if ((thisLine[j].equalsIgnoreCase("if") || thisLine[j].equalsIgnoreCase("else") || thisLine[j].equalsIgnoreCase("then")) && !thisLine[j - 1].equalsIgnoreCase("end")) {
@@ -332,6 +332,7 @@ public class LexicalAnalyzer
           }
 
 
+
             if(thisLine[j].equalsIgnoreCase("**"))
             {
                 fun.arithmetic(thisLine[j], thisLine[j - 1], thisLine[j + 1], Java);
@@ -344,6 +345,18 @@ public class LexicalAnalyzer
               if (thisLine[k].equalsIgnoreCase("+")) {
                 Java.add(arith.add(thisLine, j));
                 j += (k - temp); // Avoid looping back through to do + again
+              }
+              else if(thisLine[k].equalsIgnoreCase("-")){
+                  Java.add(arith.subtract(thisLine, j));
+                  j += (k - temp);
+              }
+              else if(thisLine[k].equalsIgnoreCase("*")){
+                  Java.add(arith.multiply(thisLine, j));
+                  j += (k - temp);
+              }
+              else if(thisLine[k].equalsIgnoreCase("/")){
+                  Java.add(arith.divide(thisLine, j));
+                  j += (k - temp);
               }
 
                 //TODO ADD ALL OTHER MATH OPERATORS
@@ -385,6 +398,8 @@ public class LexicalAnalyzer
                 Java.add(fun.functionReturn(thisLine, j));
             }
 
+            //This function may be unnecessary, and DOES cause issues in the printing of numbers.
+/*
             if(j < thisLine.length && fun.isNumeric(thisLine[j]))
             {
                 boolean isDeclaration = false;
@@ -397,7 +412,7 @@ public class LexicalAnalyzer
                 if(!isDeclaration)
                     Java.add(thisLine[j] + ";");
             }
-
+*/
             if(j < thisLine.length && thisLine[j].contains("!"))
             {
                 Java.add(fun.comments(thisLine, j));
