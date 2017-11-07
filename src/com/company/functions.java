@@ -391,7 +391,7 @@ public class functions
         if(!line[j].equalsIgnoreCase(""))
         {
           //want the form "subroutine(....)" not "end subroutine"
-          if(line[j].equalsIgnoreCase("subroutine") && !line[j - 1].equalsIgnoreCase("end"))
+          if(j > 0 && line[j].equalsIgnoreCase("subroutine") && !line[j - 1].equalsIgnoreCase("end"))
           {
             globalsPresent = true;
             j++;
