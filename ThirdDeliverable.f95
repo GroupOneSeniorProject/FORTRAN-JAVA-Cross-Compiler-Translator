@@ -10,7 +10,7 @@ real function functest(z, x)
 
 end function functest
 
-program secondDeliverable
+program thirdDeliverable
 
         implicit none
 
@@ -92,7 +92,7 @@ program secondDeliverable
 
 
 
-end program secondDeliverable
+end program thirdDeliverable
 
 integer function incrementByOne(w)
 
