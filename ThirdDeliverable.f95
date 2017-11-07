@@ -1,107 +1,55 @@
-real function functest(z, x)
-
-        implicit none
-
-        real, intent(in) :: z, x
-
-        functest = z ** z
-
-        return
-
-end function functest
-
 program thirdDeliverable
 
         implicit none
+        
+        integer, dimension(5) :: x      
+		
+		integer :: scalar
+        
+        integer :: i
+		
+	scalar = 5
+        
+        x(1) = 1
 
-        integer :: a, b, c, w = 0
+        x(2) = 2
 
-        integer :: incrementByOne
+        x(3) = 3
 
-        real :: x, y, z = 0
+        x(4) = 4
 
-        real :: functest
+        x(5) = 5
 
-        character(len=6) :: string1, string2
+        i = 1
+        
+        do while(i <= 5 )
+                
+        print *, x(i)
+        
+        i = i + 1
+        
+        end do
 
-        logical :: bool
+        call scalarmult(x, scalar)
 
-        print *, "Enter two numbers to be added together:"
+        i = 1
 
-        read *, a
-
-        read *, b
-
-        c = a + b
-
-        print *, "The result is ", c
-
-        print *, "Enter a word of six letters or less"
-
-        read *, string1
-
-        print *, "Enter a second letter of six letters or less"
-
-        read *, string2
-
-        bool = string1 == string2
-
-        if (bool) then
-
-        print *, "The words entered are identical"
-
-        else
-
-        print *, "The words entered are different"
-
-        end if
-
-        print *, "Enter a value of X to find the Sin of"
-
-        read *, x
-
-        print *, "Enter a value of Y to find the Cos of"
-
-        read *, y
-
-        print *, "Enter a value of Z to find the Absolute value of"
-
-        read *, z
-
-        x = sin(x)
-
-        y = cos(y)
-
-        z = abs(z)
-
-        print *, "The Sin of X is ", x
-
-        print *, "The Cos of Y is ", y
-
-        print *, "The Absolute Value of Z is ", z
-
-        print *, "X is ", x
-
-        z = functest(z, x)
-
-        w = incrementByOne(w)
-
-        print *, "X is ", x
-
-        print *, "Z ** Z is ", z
-
-
-
+        do while(i <= 5 )
+                
+        print *, x(i)
+        
+        i = i + 1
+        
+        end do
+        
 end program thirdDeliverable
 
-integer function incrementByOne(w)
+subroutine scalarmult(x, scalar)
 
-        implicit none
+        integer, intent(inout) :: x(5)
+		
+		integer, intent(in) :: scalar
 
-        integer intent(in) :: w
+        x = x * scalar
 
-        incrementByOne = w + 1
-
-        return
-
-end function incrementByOne
+end subroutine
