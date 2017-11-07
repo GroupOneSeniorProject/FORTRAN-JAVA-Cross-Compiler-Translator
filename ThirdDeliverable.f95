@@ -3,12 +3,8 @@ program thirdDeliverable
         implicit none
         
         integer, dimension(5) :: x      
-		
-		integer :: scalar
-        
+		        
         integer :: i
-		
-	scalar = 5
         
         x(1) = 1
 
@@ -30,7 +26,7 @@ program thirdDeliverable
         
         end do
 
-        call scalarmult(x, scalar)
+        call scalarmult(x)
 
         i = 1
 
@@ -44,12 +40,11 @@ program thirdDeliverable
         
 end program thirdDeliverable
 
-subroutine scalarmult(x, scalar)
+subroutine scalarmult(x)
 
         integer, intent(inout) :: x(5)
 		
-		integer, intent(in) :: scalar
 
-        x = x * scalar
+        x = x * 5
 
 end subroutine
